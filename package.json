@@ -1,0 +1,16 @@
+{
+  "name": "bwd-labs",
+  "version": "1.0.0",
+  "description": "Овсянникова Анастасия Сергеевна\r ПрИ-23",
+  "main": "index.js",
+  "scripts": {
+
+  "start": "webpack serve",
+
+  "build": "webpack"
+
+},
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
