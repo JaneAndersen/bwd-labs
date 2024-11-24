@@ -1,0 +1,553 @@
+
+@font-face {
+    font-family: Sriracha;
+    src: url("Sriracha.ttf");
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Sriracha;
+    /*background-image: url("images/paper.webp");*/
+    background-color: #efe7d0;
+    margin: 0;
+    padding: 10px;
+    margin-bottom: 0%;
+}
+
+header {
+    position: fixed;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    background-color: #ffff95;
+    border: 2px solid #c59700;
+    z-index: 100;
+    top: 0;
+    left: 0;
+}
+main {
+    margin-top: 40px;
+    padding: 20px;
+}
+
+h1 {
+    color: #6d4c41;
+    font-size: 3em;
+    text-align: center;
+    margin-bottom: 5px;
+    margin-top: 5%;
+}
+h2 {
+    font-size: 200%;
+}
+p {
+    font-size: 120%;
+}
+form {
+    
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    width: 50%;
+    margin: 0 auto; 
+}
+
+
+label {
+    display: block;
+    font-size: 30px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+button[type="submit"] {
+    background-color: #ffff77; 
+    color: #000000;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.boards {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 2%;
+}
+
+.board {
+    background-color: #fffd75;
+    width: 80%;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border: 4px solid #996600;
+}
+
+.board h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.task {
+    background-color: #ffffbb;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    cursor: grab;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 40px; 
+    max-width: 100%; 
+    word-wrap: break-word; 
+    overflow: hidden; 
+    overflow-wrap: break-word; 
+    white-space: normal; 
+    hyphens: auto;
+    border: 2px solid #996600;
+}
+.delete-btn {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 40px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+button {
+font-family: Sriracha;
+font-size: 200%;  
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.buttonST {
+    font-size:30px;
+    color: #444444;
+}
+
+
+input[type="checkbox"] {
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+
+button:hover {
+    opacity: 0.5;
+}
+
+input[type="checkbox"]:hover {
+    opacity: 0.8;
+}
+
+
+.completed {
+    text-decoration: line-through;
+    color: #888;
+}
+
+ul.nav{
+    margin-left: 45em;
+    list-style: none;
+    margin-bottom: 1em;
+}
+.nav li { 
+    display: inline; 
+    
+}
+ul.nav a {
+    display: inline-block;
+    width: 7em;
+    height: 2em;
+    padding:0.1em;
+    background-color: #f4f4f4;
+    font-size: 1.5em;
+    color: #333;
+    text-align: center;
+}
+
+img {
+    width: 35em;
+    height: 35em;
+}
+
+img.ok {
+    float: right;
+}
+img.Error {
+    background-image: url("images/404 Error.svg");
+}
+img.Main {
+    background-image:url("images/main.svg");
+    width: 500px;
+    height: 500px;
+    float: right;
+}
+img.About {
+    background-image:url("images/about.svg");
+    width: 500px;
+    height: 500px;
+    float: right;
+}
+.burger {
+    cursor: pointer;
+    display: none;
+}
+
+.burger div {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+.nav-links li a{
+    color: #000000;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.nav-links {
+    display: flex;
+    flex-direction: row; 
+    gap: 15px;
+    list-style: none;
+}
+
+/* Стили для активного элемента меню */
+.nav-links li a.active {
+    background-color: #fff8ef;
+    border: 1px solid #996600;
+    border-radius: 5px;
+    color: #333;
+    padding-left: 3px;
+    padding-right: 3px;
+    cursor: default; /* Курсор указывает на то, что элемент не кликабельный */
+    pointer-events: none; /* Отключить возможность нажатия */
+}
+
+/* Добавим плавный переход для стиля */
+.nav-links li a {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Стили для других ссылок */
+.nav-links li a:hover {
+    background-color: #ccc; /* Цвет при наведении */
+    color: #fff;
+}
+
+.center-container {
+    display: flex;
+    justify-content: center; /* Центрирование по горизонтали */
+    align-items: center;     /* Центрирование по вертикали */
+    height: 100vh;           /* Занять всю высоту экрана */
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.about {
+    
+    width: fit-content;
+    height: 35em;
+    margin: 20px auto;
+    background-color: #fff9c4; /* Светло-желтый фон для имитации листка */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    line-height: 1.6;
+    color: #333;
+    border: 1px solid #e0c066;
+}
+
+#addTaskBtn {
+    background-color: #fff9c4;
+    border: 1px solid #e0c066;
+    display: block;
+    margin: 0 auto 20px auto;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    
+}
+
+.edit-input {
+    font-size: 16px;
+    padding: 8px; /* Небольшой внутренний отступ */
+    border: 1px solid #ccc; /* Рамка вокруг поля */
+    border-radius: 4px;
+    box-sizing: border-box; /* Учитываем рамки и паддинги */
+    width: 100%; /* Ширина по размеру блока задачи */
+    height: 100%; /* Высота по размеру блока задачи */
+    line-height: 1.5; /* Для удобного чтения и редактирования текста */
+    resize: none; /* Запрет изменения размеров */
+    overflow: hidden; /* Обрезка текста, чтобы не выходил за пределы поля */
+    text-align: left; /* Выравнивание текста по левому краю */
+    white-space: normal; /* Позволяет переноси строк внутри поля */
+    word-wrap: break-word; /* Перенос слов, если они слишком длинные */
+    text-overflow: ellipsis;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    resize: none;
+}
+
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1000; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); 
+    justify-content: center;
+    align-items: center;
+}
+.modal-content {
+    background-color: #fff;
+    background-image: url("images/paper.webp");
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px; 
+    max-width: 80%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative;
+}
+
+#taskInput {
+    width: 100px;
+    min-height: 47px;
+    height: auto; 
+    padding: 5px; 
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    box-sizing: border-box; 
+    font-size: 16px; 
+    resize: vertical;
+    left: 0px;
+}
+
+button.OkBut {
+    margin: 10px;
+    padding: 10px 20px;
+    border: 1px solid #996600;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+#cancelBtn {
+    background-color: #ff8888;
+    margin-top: 5px;
+}
+@media (min-width: 1024px) {
+    .boards {
+        display: flex;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+    body {
+        font-size: calc(12vw);
+    }
+    .nav-links {
+        position: fixed;
+        right: 0;
+        height: 100%;
+        top: 55px;
+        background-color: #f0e68c;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in;
+        z-index: 10;
+        gap: 10px;
+        padding: 15px;
+        list-style: none;
+        margin-top: 10%;
+    }
+    .nav-links li a{
+        color: #000000;
+        text-decoration: none;
+        font-size: 100%;
+    }
+
+    body {
+        font-size: 14px;
+    }
+
+    .burger {
+        display: block;
+    }
+
+    .nav-active {
+        transform: translateX(0);
+    }
+
+    .burger.toggle .line1 {
+        transform: rotate(-45deg) translate(-5px, 6px);
+    }
+
+    .burger.toggle .line2 {
+        opacity: 0;
+    }
+
+    .burger.toggle .line3 {
+        transform: rotate(45deg) translate(-5px, -6px);
+    }
+
+    .nav-links li {
+        margin-right: auto;
+        opacity: 0;
+        font-size: 200%;
+    }
+    
+    .nav-active li {
+        opacity: 1;
+        transition: opacity 0.5s ease-in;
+    }
+    .boards {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    img.ok {
+        display:none;
+    }
+    h1 {
+        font-size: 400%;
+        margin-top: 15%;
+    }
+    h2 {
+        font-size: 350%;
+    }
+    p {
+        font-size: 300%;
+    }
+    header {
+        height: 10%;
+        font-size: 200%;
+    }
+    logo {
+        font-size: 200%;
+    }
+    .task {
+        font-size: 180%;
+    }
+    
+}
+
+@media (max-width: 768px) {
+    
+    body {
+        font-size: calc(30vw);
+    }
+
+    .nav-links li a{
+        color: #000000;
+        text-decoration: none;
+        font-size: 100%;
+    }
+    .nav-links {
+        position: fixed;
+        right: 0;
+        height: 100%;
+        top: 55px;
+        background-color: #f0e68c;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in;
+        z-index: 10;
+        gap: 10px;
+        padding: 15px;
+        list-style: none;
+        font-size: 200%;
+    }
+
+    .burger {
+        display: block;
+    }
+
+
+    .nav-active {
+        transform: translateX(0);
+    }
+
+    .burger.toggle .line1 {
+        transform: rotate(-45deg) translate(-5px, 6px);
+    }
+
+    .burger.toggle .line2 {
+        opacity: 0;
+    }
+
+    .burger.toggle .line3 {
+        transform: rotate(45deg) translate(-5px, -6px);
+    }
+
+    .nav-links li {
+        margin-right: auto;
+        opacity: 0;
+    }
+    
+    .nav-active li {
+        opacity: 1;
+        transition: opacity 0.5s ease-in;
+    }
+    .boards {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    img.ok {
+        display:none;
+    }
+   
+    h2 {
+        font-size: 350%;
+    }
+    p {
+        font-size: 300%;
+    }
+    header {
+        height: 10%;
+        font-size: 200%;
+    }
+    logo {
+        font-size: 200%;
+    }
+    .task {
+        font-size: 180%;
+    }
+    
+}
