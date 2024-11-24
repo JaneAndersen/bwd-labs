@@ -1,7 +1,5 @@
-// Инициализация списка задач
 let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
-// Элементы интерфейса
 const elements = {
     addTaskBtn: document.getElementById('addTaskBtn'),
     taskModal: document.getElementById('taskModal'),
@@ -10,13 +8,14 @@ const elements = {
     cancelBtn: document.getElementById('cancelBtn'),
     todoList: document.getElementById('todoList'),
     inProgressList: document.getElementById('inProgressList'),
-    doneList: document.getElementById('doneList')
+    doneList: document.getElementById('doneList'),
+    sortAscBtn: document.getElementById('sortAscBtn'),
+    sortDescBtn: document.getElementById('sortDescBtn')
 };
 
-// Открытие/закрытие модального окна
 const toggleModal = (isVisible) => {
     elements.taskModal.style.display = isVisible ? 'flex' : 'none';
-    if (!isVisible) elements.taskForm.reset(); // Сброс поля ввода
+    if (!isVisible) elements.taskForm.reset();
 };
 
 elements.addTaskBtn.addEventListener('click', () => {
@@ -29,16 +28,14 @@ elements.taskModal.addEventListener('click', (e) => {
     if (e.target === elements.taskModal) toggleModal(false);
 });
 
-// Добавление задачи
 elements.taskForm.addEventListener('submit', (e) => {
     e.preventDefault();
     addTask();
 });
 
-// Обработка нажатия клавиши Enter в поле ввода
 elements.taskInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
-        e.preventDefault(); // Чтобы не отправлялась форма
+        e.preventDefault();
         addTask();
     }
 });
@@ -54,16 +51,13 @@ function addTask() {
     }
 }
 
-// Загрузка задач при загрузке страницы
 window.onload = () => tasks.forEach(addTaskToBoard);
 
-// Добавление задачи в соответствующую колонку
 function addTaskToBoard(task) {
     const taskDiv = createTaskElement(task);
     getTaskList(task.status).appendChild(taskDiv);
 }
 
-// Создание HTML элемента задачи
 function createTaskElement(task) {
     const taskDiv = document.createElement('div');
     taskDiv.classList.add('task');
@@ -87,20 +81,15 @@ function createTaskElement(task) {
     return taskDiv;
 }
 
-// Редактирование задачи
 function editTask(taskDiv, task) {
     const input = document.createElement('textarea');
     input.value = task.name;
     input.classList.add('edit-input');
 
-    // Устанавливаем фиксированную высоту для текстового поля
-    input.style.height = '100px'; // Задаем фиксированную высоту
+    input.style.height = '100px'; 
 
-    // Обработчик для события прокрутки
     input.addEventListener('wheel', (e) => {
-        // Если текст больше, чем текстовое поле, то прокрутка должна работать
         if (input.scrollHeight > input.clientHeight) {
-            e.stopPropagation(); // Остановить всплытие события
         }
     });
 
@@ -117,7 +106,6 @@ function editTask(taskDiv, task) {
     input.focus();
 }
 
-// Сохранение нового названия задачи
 function saveTaskName(input, task, taskDiv) {
     const newName = input.value.trim();
     if (newName) task.name = newName;
@@ -125,19 +113,15 @@ function saveTaskName(input, task, taskDiv) {
     taskDiv.replaceWith(createTaskElement(task));
 }
 
-// Автоматическое изменение высоты текстового поля
 function autoResizeTextarea(textarea) {
     textarea.style.height = 'auto';
     textarea.style.height = `${textarea.scrollHeight}px`;
 }
 
-// Применяем autoResizeTextarea
 elements.taskInput.addEventListener('input', () => autoResizeTextarea(elements.taskInput));
 
-// Устанавливаем высоту при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => autoResizeTextarea(elements.taskInput));
 
-// Перетаскивание задач
 function dragStart(e) {
     e.dataTransfer.setData('text/plain', e.target.dataset.id);
     setTimeout(() => e.target.classList.add('dragging'), 0);
@@ -147,7 +131,6 @@ function dragEnd(e) {
     e.target.classList.remove('dragging');
 }
 
-// Перемещение задач между колонками
 const boards = document.querySelectorAll('.board');
 boards.forEach(board => {
     board.addEventListener('dragover', e => e.preventDefault());
@@ -163,14 +146,12 @@ function dropTask(e) {
     e.currentTarget.querySelector('.task-list').appendChild(document.querySelector(`[data-id='${id}']`));
 }
 
-// Удаление задачи
 function deleteTask(id) {
     tasks = tasks.filter(task => task.id != id);
     localStorage.setItem('tasks', JSON.stringify(tasks));
     document.querySelector(`[data-id='${id}']`).remove();
 }
 
-// Получение списка задач по статусу
 function getTaskList(status) {
     return {
         'todo': elements.todoList,
@@ -178,3 +159,31 @@ function getTaskList(status) {
         'done': elements.doneList
     }[status];
 }
+
+elements.sortAscBtn.addEventListener('click', () => sortTasks(true));
+elements.sortDescBtn.addEventListener('click', () => sortTasks(false));
+
+function sortTasks(isAscending) {
+    tasks.sort((a, b) => {
+        if (isAscending) {
+            return a.name.localeCompare(b.name);
+        } else {
+            return b.name.localeCompare(a.name);
+        }
+    });
+
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    refreshTaskBoard();
+}
+
+function refreshTaskBoard() {
+    elements.todoList.innerHTML = '';
+    elements.inProgressList.innerHTML = '';
+    elements.doneList.innerHTML = '';
+
+    tasks.forEach(addTaskToBoard);
+}
+
+window.onload = () => {
+    tasks.forEach(addTaskToBoard);
+};

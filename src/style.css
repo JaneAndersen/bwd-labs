@@ -235,7 +235,6 @@ img.About {
     list-style: none;
 }
 
-/* Стили для активного элемента меню */
 .nav-links li a.active {
     background-color: #fff8ef;
     border: 1px solid #996600;
@@ -243,26 +242,24 @@ img.About {
     color: #333;
     padding-left: 3px;
     padding-right: 3px;
-    cursor: default; /* Курсор указывает на то, что элемент не кликабельный */
-    pointer-events: none; /* Отключить возможность нажатия */
+    cursor: default;
+    pointer-events: none; 
 }
 
-/* Добавим плавный переход для стиля */
 .nav-links li a {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Стили для других ссылок */
 .nav-links li a:hover {
-    background-color: #ccc; /* Цвет при наведении */
+    background-color: #ccc;
     color: #fff;
 }
 
 .center-container {
     display: flex;
-    justify-content: center; /* Центрирование по горизонтали */
-    align-items: center;     /* Центрирование по вертикали */
-    height: 100vh;           /* Занять всю высоту экрана */
+    justify-content: center;
+    align-items: center;     
+    height: 100vh;           
 }
 
 .logo {
@@ -275,7 +272,7 @@ img.About {
     width: fit-content;
     height: 35em;
     margin: 20px auto;
-    background-color: #fff9c4; /* Светло-желтый фон для имитации листка */
+    background-color: #fff9c4; 
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -297,18 +294,18 @@ img.About {
 
 .edit-input {
     font-size: 16px;
-    padding: 8px; /* Небольшой внутренний отступ */
-    border: 1px solid #ccc; /* Рамка вокруг поля */
+    padding: 8px;
+    border: 1px solid #ccc; 
     border-radius: 4px;
-    box-sizing: border-box; /* Учитываем рамки и паддинги */
-    width: 100%; /* Ширина по размеру блока задачи */
-    height: 100%; /* Высота по размеру блока задачи */
-    line-height: 1.5; /* Для удобного чтения и редактирования текста */
-    resize: none; /* Запрет изменения размеров */
-    overflow: hidden; /* Обрезка текста, чтобы не выходил за пределы поля */
-    text-align: left; /* Выравнивание текста по левому краю */
-    white-space: normal; /* Позволяет переноси строк внутри поля */
-    word-wrap: break-word; /* Перенос слов, если они слишком длинные */
+    box-sizing: border-box; 
+    width: 100%;
+    height: 100%; 
+    line-height: 1.5;
+    resize: none; 
+    overflow: hidden; 
+    text-align: left;
+    white-space: normal; 
+    word-wrap: break-word;
     text-overflow: ellipsis;
     white-space: pre-wrap;
     overflow-wrap: break-word;
@@ -365,6 +362,26 @@ button.OkBut {
 #cancelBtn {
     background-color: #ff8888;
     margin-top: 5px;
+}
+.sort-buttons-container {
+    display: flex; 
+    justify-content: center;
+}
+
+.sort-btn {
+    background-color: #996600;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    margin: 5px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    font-size: 150%;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.sort-btn:hover {
+    opacity: 0.5;
 }
 @media (min-width: 1024px) {
     .boards {
